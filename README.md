@@ -1,44 +1,48 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Autor
+Mislav Miočević
 
-## Available Scripts
+# Zadatak
+Izraditi Single Page aplikaciju za prikaz rezultata utakmica i poretka klubova po kolima za sezonu
+2016/2017 engleske nogometne lige.
 
-In the project directory, you can run:
+### Specifikacije
+Aplikacija treba sadržavati sljedeće elemente:
+ 1. Padajući izbornik za odabir kola za koje će se prikazivati rezultati
+ 2. Rezultate svih utakmica odabranog kola (s tim da se inicijalno prikazuju rezultati zadnjeg kola)
+ 3. Ljestvicu sa poretkom klubova nakon zadanog kola
+ 
+Ljestvica treba sadržavati sljedeće elemente:
+ 1. Poziciju kluba na ljestvici
+ 2. Naziv kluba
+ 3. Broj odigranih utakmica
+ 4. Broj dobivenih utakmica
+ 5. Broj nerješenih utakmica
+ 6. Broj izgubljenih utakmica
+ 7. Broj postignutih golova
+ 8. Broj primljenih golova
+ 9. Gol razliku
+ 10. Broj bodova
+  
+Broj bodova se izračunava po sljedećem ključu:
+ 1. Svaka pobjeda donosi 3 boda
+ 2. Svaka nerješena utakmica donosi 1 bod
+ 3. Porazi ne donose bodove
 
-### `npm start`
+Ljestvica treba biti sortirana silazno po broju bodova. Prvorangirani tim na ljestvici je onaj sa najvećim
+brojem bodova. Ukoliko 2 tima imaju isti broj bodova, bolje rangirani tim je onaj koji ima bolju gol razliku.
+Ako je i gol razlika jednaka, tim sa većim brojem postignutih golova će biti bolje rangiran.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Tehnologije
+Tehnologije koje treba koristiti pri izradi aplikacije:
+ 1. React
+ 2. Redux
+ 3. Typescript
+ 
+Radi lakše i brže izrade zadataka, preporuča se korištenje TypeScript React Startera kao i njegove
+dokumentacije. Podaci sa rezultatima utakmica u json formatu mogu se preuzeti ovdje.
+Nije dozvoljeno mijenjanje strukture podataka.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Dodatno
+Bonus bodove možeš dobiti za:
+ 1. Prikaz trenda posljednjih pet utakmica za svaki tim (npr. W W D L W)
+ 2. Dizajn
