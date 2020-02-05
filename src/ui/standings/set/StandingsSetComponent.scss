@@ -3,4 +3,35 @@
       padding: 0.5rem;
       text-align: center;
    }
+
+   &__match-statuses {
+      display: flex;
+
+      .loss,
+      .draw,
+      .win,
+      .not_played {
+         width: 1.2rem;
+         height: 1.2rem;
+         margin: 0.3rem;
+         border-radius: 50%;
+         border: 2px solid black;
+      }
+
+      .loss {
+         background-color: red;
+      }
+
+      .draw {
+         background: white;
+      }
+
+      .win {
+         background-color: green;
+      }
+
+      .not_played {
+         background-color: grey;
+      }
+   }
 }

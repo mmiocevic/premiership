@@ -19,6 +19,7 @@ export const StandingsComponent = ({ standings }: StandingsComponentProps): JSX.
          <th>GA</th>
          <th>GD</th>
          <th>Pts</th>
+         <th>Last 5</th>
       </tr>
       </thead>
 

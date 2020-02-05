@@ -1,5 +1,5 @@
 import { MatchModel, RoundModel } from '../rounds/RoundsModels';
-import { StandingsSet } from '../../ui/standings/set/StandingsSetComponent';
+import { LastFiveMatchesStatuses, MatchStatus, StandingsSet } from '../../ui/standings/set/StandingsSetComponent';
 
 interface StandingsHash {
    [key: string]: StandingsSet;
@@ -71,7 +71,8 @@ const updateTeamStandingSet = (standingSet: StandingsSet, teamStats: TeamStats):
          losses: teamLosses,
          goalsScored: teamGoalsScored,
          goalsAgainst: teamGoalsAgainst,
-         points
+         points,
+         lastFiveMatches
       } = standingSet;
       const newGoalsScored = goalsScored + teamGoalsScored;
       const newGoalsAgainst = goalsAgainst + teamGoalsAgainst;
@@ -85,7 +86,8 @@ const updateTeamStandingSet = (standingSet: StandingsSet, teamStats: TeamStats):
          goalsScored: newGoalsScored,
          goalsAgainst: newGoalsAgainst,
          goalsDifference: newGoalsScored - newGoalsAgainst,
-         points: points + calculatePoints(wins, draws)
+         points: points + calculatePoints(wins, draws),
+         lastFiveMatches: updateLastFiveMatchesWithMostRecentAtFirstPlace(lastFiveMatches, { wins, draws, losses })
       };
    }
    else {
@@ -98,13 +100,37 @@ const updateTeamStandingSet = (standingSet: StandingsSet, teamStats: TeamStats):
          goalsScored: goalsScored,
          goalsAgainst: goalsAgainst,
          goalsDifference: goalsScored - goalsAgainst,
-         points: calculatePoints(wins, draws)
+         points: calculatePoints(wins, draws),
+         lastFiveMatches: updateLastFiveMatchesWithMostRecentAtFirstPlace([
+            MatchStatus.NOT_PLAYED,
+            MatchStatus.NOT_PLAYED,
+            MatchStatus.NOT_PLAYED,
+            MatchStatus.NOT_PLAYED,
+            MatchStatus.NOT_PLAYED
+         ], { wins, draws, losses })
       };
    }
 };
 
 const calculatePoints = (wins: boolean, draws: boolean): number =>
    (wins && 3) || (draws && 1) || 0;
+
+const updateLastFiveMatchesWithMostRecentAtFirstPlace = (lastFiveMatches: LastFiveMatchesStatuses,
+                                                         teamWinningStatus: TeamWinningStatus)
+   : LastFiveMatchesStatuses => {
+   const { wins, losses, draws } = teamWinningStatus;
+   const newLastFiveMatches = [ ...lastFiveMatches ] as LastFiveMatchesStatuses;
+
+   newLastFiveMatches.pop();
+
+   const matchStatus = wins ? MatchStatus.WIN
+                            : losses ? MatchStatus.LOSS :
+                              draws ? MatchStatus.DRAW
+                                    : MatchStatus.NOT_PLAYED;
+   newLastFiveMatches.unshift(matchStatus);
+
+   return newLastFiveMatches;
+};
 
 type TeamWinningStatus = Pick<TeamStats,
    'wins' |
