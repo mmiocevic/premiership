@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux'
-import createSagaMiddleware from 'redux-saga'
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import { roundsReducer, RoundsReducerState } from '../domain/rounds/RoundsReducer';
 import { roundsSagas } from '../domain/rounds/RoundsSagas';
 
@@ -16,4 +16,4 @@ export const store = createStore(
    applyMiddleware(sagaMiddleware)
 );
 
-sagaMiddleware.run(roundsSagas)
+sagaMiddleware.run(roundsSagas);

@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
 import React, { useEffect } from 'react';
 import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 import { StoreState } from '../configuration/StoreConfiguration';
 import { RoundModel } from '../domain/rounds/RoundsModels';
 import {
@@ -11,6 +11,8 @@ import {
 } from '../domain/rounds/RoundsActionCreators';
 import { RoundChangerComponent } from './round-changer/RoundChangerComponent';
 import { RoundSummaryComponent } from './round-summary/RoundSummaryComponent';
+import { StandingsComponent } from './standings/StandingsComponent';
+import { roundToStandings } from '../domain/standings/StandingsUtilities';
 
 interface PropsState {
    rounds: RoundModel[];
@@ -35,7 +37,7 @@ const mapDispatchToProps = (dispatch: Dispatch<DispatchStateTypes>): DispatchSta
    changeSelectedRound: (selectedRoundId: number) => dispatch(changeSelectedRoundActionCreator(selectedRoundId))
 });
 
-type AppProps = DispatchState & PropsState;
+type AppProps = PropsState & DispatchState;
 
 export default connect(mapStateToProps, mapDispatchToProps)((
    {
@@ -44,13 +46,14 @@ export default connect(mapStateToProps, mapDispatchToProps)((
       getRounds,
       changeSelectedRound
    }: AppProps): JSX.Element => {
+
    useEffect(() => {
       getRounds();
    }, []);
 
    return (
       <div className="app">
-         {rounds.length && selectedRoundId > -1 && (
+         {rounds.length > 0 && selectedRoundId > -1 && (
             <>
                <div>
                   <RoundChangerComponent
@@ -65,15 +68,23 @@ export default connect(mapStateToProps, mapDispatchToProps)((
                      matches={getRoundById(rounds, selectedRoundId).matches}
                   />
                </div>
+
+               <div>
+                  <StandingsComponent
+                     standings={roundToStandings(rounds, selectedRoundId)}
+                  />
+               </div>
             </>
          )}
       </div>
    );
 });
 
-const extractRoundNumbers = (rounds: RoundModel[]) => rounds.map(round => round.round);
+const extractRoundNumbers = (rounds: RoundModel[]) =>
+   rounds.map(round => round.round);
 
-const getRoundById = (rounds: RoundModel[], id: number) => rounds.find(round => round.round === id) || {
-   round: -1,
-   matches: []
-};
+const getRoundById = (rounds: RoundModel[], id: number) =>
+   rounds.find(round => round.round === id) || {
+      round: -1,
+      matches: []
+   };

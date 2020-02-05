@@ -10,8 +10,7 @@ export interface RoundsReducerState {
 }
 
 const roundsReducerState = {
-   // url: 'https://s3.eu-central-1.amazonaws.com/js-assignment/data.json',
-   url: 'http://www.mocky.io/v2/5e39c98d3200006cc4ddfcfe',
+   url: '/js-assignment/data.json',
    selectedRoundId: -1,
    rounds: []
 };

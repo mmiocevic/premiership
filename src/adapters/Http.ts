@@ -1,12 +1,9 @@
 import axios from 'axios';
 
 export class Http {
-   private config = {
-   };
-
    public get = async(url: string) => {
       try {
-         const response = await axios.get(url, this.config);
+         const response = await axios.get(url);
          return response.data;
       }
       catch (e) {

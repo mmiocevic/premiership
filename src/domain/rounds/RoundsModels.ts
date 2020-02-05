@@ -1,6 +1,6 @@
 export interface RoundModel {
    round: number;
-   matches: MatchModel[]
+   matches: MatchModel[];
 }
 
 export interface MatchModel {

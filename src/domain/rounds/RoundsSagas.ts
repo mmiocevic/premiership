@@ -1,9 +1,9 @@
-import { takeEvery, call, select, put } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { RoundModel } from './RoundsModels';
 import { RoundsActionTypes } from './RoundsActionTypes';
 import { GetRoundsActionCreator, storeRoundsActionCreator } from './RoundsActionCreators';
 import { roundsUrlSelector } from './RoundsSelectors';
 import { getRoundsAdapter } from '../../adapters/rounds/RoundsAdapter';
-import { RoundModel } from './RoundsModels';
 
 function* getRoundsSaga(action: GetRoundsActionCreator) {
    try {
@@ -11,7 +11,8 @@ function* getRoundsSaga(action: GetRoundsActionCreator) {
       const rounds: RoundModel[] = yield call(getRoundsAdapter, url);
 
       yield put(storeRoundsActionCreator(rounds));
-   } catch (e) {
+   }
+   catch (e) {
       // TODO MM
    }
 }

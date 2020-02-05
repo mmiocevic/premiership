@@ -1,3 +1,4 @@
 import { StoreState } from '../../configuration/StoreConfiguration';
 
-export const roundsUrlSelector = (state: StoreState) =>  state.roundsReducer.url;
+export const roundsUrlSelector = (state: StoreState) =>
+   state.roundsReducer.url;

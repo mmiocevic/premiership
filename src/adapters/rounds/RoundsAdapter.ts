@@ -1,5 +1,4 @@
-import { Http } from "../Http";
+import { Http } from '../Http';
 
-export const getRoundsAdapter = (url: string) => {
-   return new Http().get(url);
-};
+export const getRoundsAdapter = (url: string) =>
+   new Http().get(url);

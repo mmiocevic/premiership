@@ -10,12 +10,12 @@ export const RoundSummaryComponent = ({ matches }: RoundSummaryComponentProps): 
    return (
       <table className="round-summary">
          <thead>
-            <tr>
-               <th>Home</th>
-               <th></th>
-               <th></th>
-               <th>Away</th>
-            </tr>
+         <tr>
+            <th>Home</th>
+            <th></th>
+            <th></th>
+            <th>Away</th>
+         </tr>
          </thead>
 
          <tbody>
