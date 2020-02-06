@@ -11,7 +11,7 @@ export interface StoreState {
 
 export const store = createStore(
    combineReducers({
-      roundsReducer: roundsReducer
+      roundsReducer
    }),
    applyMiddleware(sagaMiddleware)
 );

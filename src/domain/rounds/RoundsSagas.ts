@@ -1,14 +1,12 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { RoundModel } from './RoundsModels';
-import { RoundsActionTypes } from './RoundsActionTypes';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { GetRoundsActionCreator, storeRoundsActionCreator } from './RoundsActionCreators';
-import { roundsUrlSelector } from './RoundsSelectors';
+import { RoundsActionTypes } from './RoundsActionTypes';
+import { RoundModel } from './RoundsModels';
 import { getRoundsAdapter } from '../../adapters/rounds/RoundsAdapter';
 
 function* getRoundsSaga(action: GetRoundsActionCreator) {
    try {
-      const url: string = yield select(roundsUrlSelector);
-      const rounds: RoundModel[] = yield call(getRoundsAdapter, url);
+      const rounds: RoundModel[] = yield call(getRoundsAdapter);
 
       yield put(storeRoundsActionCreator(rounds));
    }

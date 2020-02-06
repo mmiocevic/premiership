@@ -19,12 +19,12 @@ export const storeRoundsActionCreator = (rounds: RoundModel[]): StoreRoundsActio
    rounds
 });
 
-export interface ChangeSelectedRoundActionCreator {
-   type: RoundsActionTypes.CHANGE_SELECTED_ROUND;
+export interface ChangeSelectedRoundIdActionCreator {
+   type: RoundsActionTypes.CHANGE_SELECTED_ROUND_ID;
    selectedRoundId: number;
 }
 
-export const changeSelectedRoundActionCreator = (selectedRoundId: number): ChangeSelectedRoundActionCreator => ({
-   type: RoundsActionTypes.CHANGE_SELECTED_ROUND,
+export const changeSelectedRoundIdActionCreator = (selectedRoundId: number): ChangeSelectedRoundIdActionCreator => ({
+   type: RoundsActionTypes.CHANGE_SELECTED_ROUND_ID,
    selectedRoundId
 });

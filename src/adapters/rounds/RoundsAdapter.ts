@@ -1,4 +1,6 @@
 import { Http } from '../Http';
 
-export const getRoundsAdapter = (url: string) =>
-   new Http().get(url);
+const url: string = '/js-assignment/data.json';
+
+export const getRoundsAdapter = <T>(): Promise<T> =>
+   Http.get(url);

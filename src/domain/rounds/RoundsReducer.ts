@@ -1,22 +1,20 @@
 import { AnyAction } from 'redux';
 import { RoundsActionTypes } from './RoundsActionTypes';
-import { ChangeSelectedRoundActionCreator, StoreRoundsActionCreator } from './RoundsActionCreators';
+import { ChangeSelectedRoundIdActionCreator, StoreRoundsActionCreator } from './RoundsActionCreators';
 import { RoundModel } from './RoundsModels';
 
 export interface RoundsReducerState {
-   url: string;
    selectedRoundId: number;
    rounds: RoundModel[];
 }
 
 const roundsReducerState = {
-   url: '/js-assignment/data.json',
    selectedRoundId: -1,
    rounds: []
 };
 
 type RoundsReducerActions = StoreRoundsActionCreator
-   | ChangeSelectedRoundActionCreator
+   | ChangeSelectedRoundIdActionCreator
    | AnyAction;
 
 export const roundsReducer = (state: RoundsReducerState = roundsReducerState,
@@ -24,8 +22,8 @@ export const roundsReducer = (state: RoundsReducerState = roundsReducerState,
    switch (action.type) {
       case RoundsActionTypes.STORE_ROUNDS:
          return storeRounds(state, action as StoreRoundsActionCreator);
-      case RoundsActionTypes.CHANGE_SELECTED_ROUND:
-         return changeSelectedRound(state, action as ChangeSelectedRoundActionCreator);
+      case RoundsActionTypes.CHANGE_SELECTED_ROUND_ID:
+         return changeSelectedRoundId(state, action as ChangeSelectedRoundIdActionCreator);
       default:
          return state;
    }
@@ -36,14 +34,13 @@ const storeRounds = (state: RoundsReducerState,
    const { rounds } = action;
 
    return {
-      ...state,
       selectedRoundId: rounds[rounds.length - 1].round,
       rounds
    };
 };
 
-const changeSelectedRound = (state: RoundsReducerState,
-                             action: ChangeSelectedRoundActionCreator): RoundsReducerState => ({
+const changeSelectedRoundId = (state: RoundsReducerState,
+                               action: ChangeSelectedRoundIdActionCreator): RoundsReducerState => ({
    ...state,
    selectedRoundId: action.selectedRoundId
 });

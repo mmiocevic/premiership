@@ -2,7 +2,7 @@ import React from 'react';
 import { MatchModel } from '../../domain/rounds/RoundsModels';
 import { RoundSummaryRowComponent } from './row/RoundSummaryRowComponent';
 
-interface RoundSummaryComponentProps {
+export interface RoundSummaryComponentProps {
    matches: MatchModel[];
 }
 

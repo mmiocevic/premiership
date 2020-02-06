@@ -2,17 +2,18 @@ import React, { useEffect } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { StoreState } from '../configuration/StoreConfiguration';
-import { RoundModel } from '../domain/rounds/RoundsModels';
 import {
-   ChangeSelectedRoundActionCreator,
-   changeSelectedRoundActionCreator,
+   ChangeSelectedRoundIdActionCreator,
+   changeSelectedRoundIdActionCreator,
    GetRoundsActionCreator,
    getRoundsActionCreator
 } from '../domain/rounds/RoundsActionCreators';
+import { RoundModel } from '../domain/rounds/RoundsModels';
 import { RoundChangerComponent } from './round-changer/RoundChangerComponent';
 import { RoundSummaryComponent } from './round-summary/RoundSummaryComponent';
 import { StandingsComponent } from './standings/StandingsComponent';
 import { roundToStandings } from '../domain/standings/StandingsUtilities';
+import { extractRoundIds, getRoundById } from '../domain/rounds/RoundsUtilities';
 
 interface PropsState {
    rounds: RoundModel[];
@@ -26,26 +27,26 @@ const mapStateToProps = (state: StoreState): PropsState => ({
 
 interface DispatchState {
    getRounds: () => void;
-   changeSelectedRound: (selectedRoundId: number) => void;
+   changeSelectedRoundId: (selectedRoundId: number) => void;
 }
 
 type DispatchStateTypes = GetRoundsActionCreator
-   | ChangeSelectedRoundActionCreator;
+   | ChangeSelectedRoundIdActionCreator;
 
 const mapDispatchToProps = (dispatch: Dispatch<DispatchStateTypes>): DispatchState => ({
    getRounds: () => dispatch(getRoundsActionCreator()),
-   changeSelectedRound: (selectedRoundId: number) => dispatch(changeSelectedRoundActionCreator(selectedRoundId))
+   changeSelectedRoundId: (selectedRoundId: number) => dispatch(changeSelectedRoundIdActionCreator(selectedRoundId))
 });
 
-type AppProps = PropsState & DispatchState;
+export type AppComponentProps = PropsState & DispatchState;
 
-export default connect(mapStateToProps, mapDispatchToProps)((
+export const AppComponent = (
    {
       rounds,
       selectedRoundId,
       getRounds,
-      changeSelectedRound
-   }: AppProps): JSX.Element => {
+      changeSelectedRoundId
+   }: AppComponentProps): JSX.Element => {
 
    useEffect(() => {
       getRounds();
@@ -53,13 +54,13 @@ export default connect(mapStateToProps, mapDispatchToProps)((
 
    return (
       <div className="app">
-         {rounds.length > 0 && selectedRoundId > -1 && (
+         {rounds.length > 0 && (
             <>
                <div>
                   <RoundChangerComponent
                      selectedRoundId={selectedRoundId}
-                     rounds={extractRoundNumbers(rounds)}
-                     onRoundChange={newRoundId => changeSelectedRound(newRoundId)}
+                     roundIds={extractRoundIds(rounds)}
+                     onRoundIdChange={newRoundId => changeSelectedRoundId(newRoundId)}
                   />
                </div>
 
@@ -78,13 +79,6 @@ export default connect(mapStateToProps, mapDispatchToProps)((
          )}
       </div>
    );
-});
+};
 
-const extractRoundNumbers = (rounds: RoundModel[]) =>
-   rounds.map(round => round.round);
-
-const getRoundById = (rounds: RoundModel[], id: number) =>
-   rounds.find(round => round.round === id) || {
-      round: -1,
-      matches: []
-   };
+export default connect(mapStateToProps, mapDispatchToProps)(AppComponent);

@@ -27,7 +27,7 @@ export const StandingsComponent = ({ standings }: StandingsComponentProps): JSX.
       {standings.map((standingsSet: StandingsSet, index: number) => (
          <StandingsSetComponent
             key={standingsSet.clubName}
-            position={index}
+            position={index + 1}
             {...standingsSet}
          />
       ))}
