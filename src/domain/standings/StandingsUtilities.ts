@@ -1,5 +1,26 @@
 import { MatchModel, RoundModel } from '../rounds/RoundsModels';
-import { LastFiveMatchesStatuses, MatchStatus, StandingsSet } from '../../ui/standings/set/StandingsSetComponent';
+
+export enum MatchStatus {
+   LOSS,
+   DRAW,
+   WIN,
+   NOT_PLAYED
+}
+
+export type LastFiveMatchesStatuses = [ MatchStatus, MatchStatus, MatchStatus, MatchStatus, MatchStatus ];
+
+export interface StandingsSet {
+   clubName: string;
+   matchesPlayed: number;
+   wins: number;
+   draws: number;
+   losses: number;
+   goalsScored: number;
+   goalsAgainst: number;
+   goalsDifference: number;
+   points: number;
+   lastFiveMatches: LastFiveMatchesStatuses;
+}
 
 interface StandingsHash {
    [key: string]: StandingsSet;

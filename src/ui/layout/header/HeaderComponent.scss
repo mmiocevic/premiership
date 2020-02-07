@@ -1,0 +1,19 @@
+@import '../../../index';
+
+.header {
+   background-color: $palette-color-blackish;
+   display: flex;
+   align-items: center;
+   padding: 0.6rem;
+
+   .brand {
+      font-size: 1.3rem;
+      color: #ffffff;
+
+      &-icon {
+         margin-right: 0.8rem;
+         color: #ffffff;
+         font-size: 1.4rem;
+      }
+   }
+}

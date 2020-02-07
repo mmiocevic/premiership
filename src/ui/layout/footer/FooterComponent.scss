@@ -1,0 +1,13 @@
+@import '../../../index';
+
+.footer {
+   display: flex;
+   justify-content: space-evenly;
+   padding: 0.4rem;
+   background-color: $palette-color-blueish-dark;
+
+   a {
+      color: #ffffff;
+      font-size: 2rem;
+   }
+}

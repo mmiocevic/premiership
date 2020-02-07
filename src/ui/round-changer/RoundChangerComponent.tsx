@@ -1,4 +1,5 @@
 import React from 'react';
+import './RoundChangerComponent.scss';
 
 export interface RoundChangerComponentProps {
    selectedRoundId: number;
@@ -23,7 +24,7 @@ export const RoundChangerComponent = (
                value={round}
                key={round}
             >
-               Round: {round}
+               Round {round}
             </option>
          ))}
       </select>

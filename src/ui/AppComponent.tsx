@@ -14,6 +14,8 @@ import { RoundSummaryComponent } from './round-summary/RoundSummaryComponent';
 import { StandingsComponent } from './standings/StandingsComponent';
 import { roundToStandings } from '../domain/standings/StandingsUtilities';
 import { extractRoundIds, getRoundById } from '../domain/rounds/RoundsUtilities';
+import { HeaderComponent } from './layout/header/HeaderComponent';
+import { FooterComponent } from './layout/footer/FooterComponent';
 
 interface PropsState {
    rounds: RoundModel[];
@@ -54,6 +56,8 @@ export const AppComponent = (
 
    return (
       <div className="app">
+         <HeaderComponent/>
+
          {rounds.length > 0 && (
             <>
                <div>
@@ -77,6 +81,8 @@ export const AppComponent = (
                </div>
             </>
          )}
+
+         <FooterComponent/>
       </div>
    );
 };
