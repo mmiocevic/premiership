@@ -12,7 +12,7 @@ import { RoundModel } from '../domain/rounds/RoundsModels';
 import { RoundChangerComponent } from './round-changer/RoundChangerComponent';
 import { RoundSummaryComponent } from './round-summary/RoundSummaryComponent';
 import { StandingsComponent } from './standings/StandingsComponent';
-import { roundToStandings } from '../domain/standings/StandingsUtilities';
+import { roundsToStandings } from '../domain/standings/StandingsUtilities';
 import { extractRoundIds, getRoundById } from '../domain/rounds/RoundsUtilities';
 import { HeaderComponent } from './layout/header/HeaderComponent';
 import { FooterComponent } from './layout/footer/FooterComponent';
@@ -73,7 +73,7 @@ export const AppComponent = (
             }}
          />
 
-         <div className="football" />
+         <div className="football"/>
 
          {rounds.length > 0 && (
             <>
@@ -93,7 +93,7 @@ export const AppComponent = (
 
                <div className="table-container space-top-bottom">
                   <StandingsComponent
-                     standings={roundToStandings(rounds, selectedRoundId)}
+                     standings={roundsToStandings(rounds, selectedRoundId)}
                   />
                </div>
             </>

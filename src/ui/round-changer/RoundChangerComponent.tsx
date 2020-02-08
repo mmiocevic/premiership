@@ -1,6 +1,6 @@
 import React from 'react';
-import './RoundChangerComponent.scss';
 import { localization } from '../../configuration/LocalizationConfiguration';
+import './RoundChangerComponent.scss';
 
 export interface RoundChangerComponentProps {
    selectedRoundId: number;

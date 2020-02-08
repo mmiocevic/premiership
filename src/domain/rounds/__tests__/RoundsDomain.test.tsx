@@ -104,7 +104,7 @@ describe('RoundsDomain', () => {
             .run();
       });
 
-      it('should', () => {
+      it('should dispatch action for error if something is wrong with request call', () => {
          const error: ErrorType = {
             message: 'I do not work on Sunday'
          };

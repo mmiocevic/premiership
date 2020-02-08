@@ -8,6 +8,9 @@ import { StandingsComponent } from '../standings/StandingsComponent';
 import { RoundModel } from '../../domain/rounds/RoundsModels';
 import * as roundsUtilitiesScope from '../../domain/rounds/RoundsUtilities';
 import * as standingsUtilitiesScope from '../../domain/standings/StandingsUtilities';
+import { HeaderComponent } from '../layout/header/HeaderComponent';
+import { FooterComponent } from '../layout/footer/FooterComponent';
+import * as localizationConfigurationScope from '../../configuration/LocalizationConfiguration';
 
 describe('AppComponent', () => {
    const dummyProps: AppComponentProps = {
@@ -21,7 +24,17 @@ describe('AppComponent', () => {
    const rounds: RoundModel[] = [ { round: 1, matches: [ { 'A': 2, 'B': 1 } ] } ];
 
    describe('render', () => {
-      it('should render nothing if rounds data not exists', () => {
+      it('should render HeaderComponent', () => {
+         expect(shallow(<AppComponent{...dummyProps} rounds={rounds}/>).find(HeaderComponent))
+            .toHaveLength(1);
+      });
+
+      it('should render background component', () => {
+         expect(shallow(<AppComponent{...dummyProps} rounds={rounds}/>).find('.football'))
+            .toHaveLength(1);
+      });
+
+      it('should not render specific components if rounds data not exists', () => {
          const comp = shallow(<AppComponent{...dummyProps}/>);
 
          expect(comp.find(RoundChangerComponent)).toHaveLength(0);
@@ -41,6 +54,11 @@ describe('AppComponent', () => {
 
       it('should render StandingsComponent if rounds data exists', () => {
          expect(shallow(<AppComponent{...dummyProps} rounds={rounds}/>).find(StandingsComponent))
+            .toHaveLength(1);
+      });
+
+      it('should render FooterComponent', () => {
+         expect(shallow(<AppComponent{...dummyProps} rounds={rounds}/>).find(FooterComponent))
             .toHaveLength(1);
       });
    });
@@ -63,6 +81,26 @@ describe('AppComponent', () => {
    });
 
    describe('components props', () => {
+      describe('HeaderComponent', () => {
+         it('selectedLocale', () => {
+            expect(shallow(<AppComponent{...dummyProps}/>)
+               .find(HeaderComponent).at(0).prop('selectedLocale'))
+               .toEqual('en');
+         });
+
+         it('onLocaleChange', () => {
+            const spy = jest.spyOn(localizationConfigurationScope, 'setLocaleToStorage');
+
+            shallow(<AppComponent{...dummyProps}/>).find(HeaderComponent).at(0)
+                                                   .simulate('localeChange', 'hr');
+
+            expect(spy)
+               .toHaveBeenCalledWith('hr');
+
+            spy.mockClear();
+         });
+      });
+
       describe('RoundChangerComponent', () => {
          it('selectedRoundId', () => {
             expect(shallow(<AppComponent{...dummyProps} rounds={rounds} selectedRoundId={3}/>)
@@ -105,7 +143,7 @@ describe('AppComponent', () => {
 
       describe('StandingsComponent', () => {
          it('standings', () => {
-            const spy = jest.spyOn(standingsUtilitiesScope, 'roundToStandings')
+            const spy = jest.spyOn(standingsUtilitiesScope, 'roundsToStandings')
                             .mockImplementationOnce((rounds, selectedRoundId): any => {
                                expect(rounds).toEqual(rounds);
                                expect(selectedRoundId).toEqual(1);

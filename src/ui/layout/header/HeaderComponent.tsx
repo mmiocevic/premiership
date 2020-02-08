@@ -1,10 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './HeaderComponent.scss';
 import { faFutbol } from '@fortawesome/free-solid-svg-icons/faFutbol';
 import { locales, Locales } from '../../../configuration/LocalizationConfiguration';
+import { brandName } from '../../../configuration/Globals';
+import './HeaderComponent.scss';
 
-interface HeaderComponentProps {
+export interface HeaderComponentProps {
    selectedLocale: Locales;
    onLocaleChange: (locale: Locales) => void;
 }
@@ -13,7 +14,7 @@ export const HeaderComponent = ({ selectedLocale, onLocaleChange }: HeaderCompon
    <header className="header">
       <div className="brand">
          <FontAwesomeIcon className="brand__icon" icon={faFutbol}/>
-         <span>Premiership</span>
+         <span>{brandName}</span>
       </div>
       <div>
          <select

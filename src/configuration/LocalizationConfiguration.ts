@@ -50,7 +50,7 @@ export const localization = new LocalizedStrings({
    }
 });
 
-const localeKey: string = 'premiership-locale';
+export const localeKey: string = 'premiership-locale';
 
 export const setLocaleToStorage = (locale: Locales) =>
    window.localStorage && window.localStorage.setItem(localeKey, locale);

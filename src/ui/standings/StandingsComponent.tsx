@@ -1,10 +1,10 @@
 import React from 'react';
-import './StandingsComponent.scss';
 import { MatchStatus, StandingsSet } from '../../domain/standings/StandingsUtilities';
-import { StandingsLegendComponent } from './last-five-matches/StandingsLegendComponent';
+import { StandingsLegendComponent } from './legend/StandingsLegendComponent';
 import { localization } from '../../configuration/LocalizationConfiguration';
+import './StandingsComponent.scss';
 
-interface StandingsComponentProps {
+export interface StandingsComponentProps {
    standings: StandingsSet[];
 }
 

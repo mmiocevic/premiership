@@ -7,9 +7,9 @@ import {
    ClearErrorActionCreator,
    ErrorType
 } from '../../domain/error-handling/ErrorHandlingActionCreators';
-import './ErrorHandlingComponent.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons/faWindowClose';
+import './ErrorHandlingComponent.scss';
 
 interface PropsState {
    error: ErrorType | undefined;

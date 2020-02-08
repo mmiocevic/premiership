@@ -3,7 +3,10 @@
    padding: 0.5rem;
    flex-flow: wrap;
 
-   > div {
+   &__loss,
+   &__draw,
+   &__win,
+   &__notPlayed {
       display: flex;
       align-items: center;
       padding: 0.5rem;

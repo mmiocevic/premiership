@@ -2,8 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons/faLinkedin';
-import './FooterComponent.scss';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
+import './FooterComponent.scss';
 
 export const FooterComponent = (): JSX.Element => (
    <footer className="footer">

@@ -1,9 +1,9 @@
 import React from 'react';
 import { MatchModel } from '../../domain/rounds/RoundsModels';
-import './RoundSummaryComponent.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons/faTrophy';
 import { localization } from '../../configuration/LocalizationConfiguration';
+import './RoundSummaryComponent.scss';
 
 export interface RoundSummaryComponentProps {
    matches: MatchModel[];

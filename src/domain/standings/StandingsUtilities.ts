@@ -26,7 +26,7 @@ interface StandingsHash {
    [key: string]: StandingsSet;
 }
 
-export const roundToStandings = (rounds: RoundModel[], round: number): StandingsSet[] => {
+export const roundsToStandings = (rounds: RoundModel[], round: number): StandingsSet[] => {
    const standingsHash: StandingsHash = {};
    let currentRound: RoundModel;
 
