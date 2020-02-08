@@ -1,5 +1,6 @@
 import React from 'react';
 import './RoundChangerComponent.scss';
+import { localization } from '../../configuration/LocalizationConfiguration';
 
 export interface RoundChangerComponentProps {
    selectedRoundId: number;
@@ -24,7 +25,7 @@ export const RoundChangerComponent = (
                value={round}
                key={round}
             >
-               Round {round}
+               {localization.round} {round}
             </option>
          ))}
       </select>

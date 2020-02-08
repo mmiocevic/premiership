@@ -2,6 +2,7 @@ import React from 'react';
 import './StandingsComponent.scss';
 import { MatchStatus, StandingsSet } from '../../domain/standings/StandingsUtilities';
 import { StandingsLegendComponent } from './last-five-matches/StandingsLegendComponent';
+import { localization } from '../../configuration/LocalizationConfiguration';
 
 interface StandingsComponentProps {
    standings: StandingsSet[];
@@ -12,17 +13,17 @@ export const StandingsComponent = ({ standings }: StandingsComponentProps): JSX.
       <table>
          <thead>
          <tr>
-            <th>Rank</th>
-            <th>Club</th>
-            <th>MP</th>
-            <th>W</th>
-            <th>D</th>
-            <th>L</th>
-            <th>GS</th>
-            <th>GA</th>
-            <th>GD</th>
-            <th>Pts</th>
-            <th>Last 5</th>
+            <th>{localization.rank}</th>
+            <th>{localization.club}</th>
+            <th>{localization.mp}</th>
+            <th>{localization.w}</th>
+            <th>{localization.d}</th>
+            <th>{localization.l}</th>
+            <th>{localization.gs}</th>
+            <th>{localization.ga}</th>
+            <th>{localization.gd}</th>
+            <th>{localization.pts}</th>
+            <th>{localization.lastFive}</th>
          </tr>
          </thead>
 

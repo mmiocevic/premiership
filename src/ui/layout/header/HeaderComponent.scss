@@ -4,16 +4,23 @@
    background-color: $palette-color-blackish;
    display: flex;
    align-items: center;
+   justify-content: space-between;
    padding: 0.6rem;
 
    .brand {
       font-size: 1.3rem;
       color: #ffffff;
+      display: flex;
+      align-items: center;
 
-      &-icon {
+      &__icon {
          margin-right: 0.8rem;
          color: #ffffff;
          font-size: 1.4rem;
       }
+   }
+
+   select {
+      padding: 0.2rem 0.3rem;
    }
 }

@@ -3,6 +3,7 @@ import { MatchModel } from '../../domain/rounds/RoundsModels';
 import './RoundSummaryComponent.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons/faTrophy';
+import { localization } from '../../configuration/LocalizationConfiguration';
 
 export interface RoundSummaryComponentProps {
    matches: MatchModel[];
@@ -16,12 +17,12 @@ export const RoundSummaryComponent = ({ matches }: RoundSummaryComponentProps): 
          <table>
             <thead>
             <tr>
-               <th>Home</th>
+               <th>{localization.home}</th>
                <th></th>
                <th></th>
                <th></th>
                <th></th>
-               <th>Away</th>
+               <th>{localization.away}</th>
             </tr>
             </thead>
 
