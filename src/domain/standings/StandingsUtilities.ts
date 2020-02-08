@@ -1,4 +1,5 @@
 import { MatchModel, RoundModel } from '../rounds/RoundsModels';
+import * as thisScope from './StandingsUtilities';
 
 export enum MatchStatus {
    LOSS,
@@ -7,7 +8,7 @@ export enum MatchStatus {
    NOT_PLAYED
 }
 
-export type LastFiveMatchesStatuses = [ MatchStatus, MatchStatus, MatchStatus, MatchStatus, MatchStatus ];
+export type LastFiveMatchesStatuses = MatchStatus[];
 
 export interface StandingsSet {
    clubName: string;
@@ -22,7 +23,7 @@ export interface StandingsSet {
    lastFiveMatches: LastFiveMatchesStatuses;
 }
 
-interface StandingsHash {
+export interface StandingsHash {
    [key: string]: StandingsSet;
 }
 
@@ -38,31 +39,31 @@ export const roundsToStandings = (rounds: RoundModel[], round: number): Standing
       }
 
       for (let j = 0; j < currentRound.matches.length; j++) {
-         updateStandingsWithMatchResults(standingsHash, currentRound.matches[j]);
+         thisScope.updateStandingsWithMatchResults(standingsHash, currentRound.matches[j]);
       }
    }
 
-   return sortStandingSetsByWinsAndGoalsDifferenceAndGoalsScored(standingsHash);
+   return thisScope.sortStandingSetsByPointsAndGoalsDifferenceAndGoalsScored(standingsHash);
 };
 
-const updateStandingsWithMatchResults = (standings: StandingsHash, match: MatchModel): void => {
+export const updateStandingsWithMatchResults = (standings: StandingsHash, match: MatchModel): void => {
    const [ homeTeam, awayTeam ] = Object.keys(match);
 
    const homeTeamGoals: number = match[homeTeam];
    const awayTeamGoals: number = match[awayTeam];
 
-   standings[homeTeam] = updateTeamStandingSet(standings[homeTeam], {
-      ...getTeamWinningStatus(homeTeamGoals, awayTeamGoals),
+   standings[homeTeam] = thisScope.updateTeamStandingSet({
+      ...thisScope.getTeamWinningStatus(homeTeamGoals, awayTeamGoals),
       team: homeTeam,
       goalsScored: homeTeamGoals,
       goalsAgainst: awayTeamGoals
-   });
-   standings[awayTeam] = updateTeamStandingSet(standings[awayTeam], {
-      ...getTeamWinningStatus(awayTeamGoals, homeTeamGoals),
+   }, standings[homeTeam]);
+   standings[awayTeam] = thisScope.updateTeamStandingSet({
+      ...thisScope.getTeamWinningStatus(awayTeamGoals, homeTeamGoals),
       team: awayTeam,
       goalsScored: awayTeamGoals,
       goalsAgainst: homeTeamGoals
-   });
+   }, standings[awayTeam]);
 };
 
 interface TeamStats {
@@ -74,7 +75,7 @@ interface TeamStats {
    goalsAgainst: number;
 }
 
-const updateTeamStandingSet = (standingSet: StandingsSet, teamStats: TeamStats): StandingsSet => {
+export const updateTeamStandingSet = (teamStats: TeamStats, standingSet?: StandingsSet): StandingsSet => {
    const {
       team,
       wins,
@@ -107,8 +108,8 @@ const updateTeamStandingSet = (standingSet: StandingsSet, teamStats: TeamStats):
          goalsScored: newGoalsScored,
          goalsAgainst: newGoalsAgainst,
          goalsDifference: newGoalsScored - newGoalsAgainst,
-         points: points + calculatePoints(wins, draws),
-         lastFiveMatches: updateLastFiveMatchesWithMostRecentAtFirstPlace(lastFiveMatches, { wins, draws, losses })
+         points: points + thisScope.calculatePoints(wins, draws),
+         lastFiveMatches: thisScope.updateLastFiveMatchesWithMostRecentAtFirstPlace(lastFiveMatches, { wins, draws, losses })
       };
    }
    else {
@@ -121,8 +122,8 @@ const updateTeamStandingSet = (standingSet: StandingsSet, teamStats: TeamStats):
          goalsScored: goalsScored,
          goalsAgainst: goalsAgainst,
          goalsDifference: goalsScored - goalsAgainst,
-         points: calculatePoints(wins, draws),
-         lastFiveMatches: updateLastFiveMatchesWithMostRecentAtFirstPlace([
+         points: thisScope.calculatePoints(wins, draws),
+         lastFiveMatches: thisScope.updateLastFiveMatchesWithMostRecentAtFirstPlace([
             MatchStatus.NOT_PLAYED,
             MatchStatus.NOT_PLAYED,
             MatchStatus.NOT_PLAYED,
@@ -133,11 +134,11 @@ const updateTeamStandingSet = (standingSet: StandingsSet, teamStats: TeamStats):
    }
 };
 
-const calculatePoints = (wins: boolean, draws: boolean): number =>
+export const calculatePoints = (wins: boolean, draws: boolean): number =>
    (wins && 3) || (draws && 1) || 0;
 
-const updateLastFiveMatchesWithMostRecentAtFirstPlace = (lastFiveMatches: LastFiveMatchesStatuses,
-                                                         teamWinningStatus: TeamWinningStatus)
+export const updateLastFiveMatchesWithMostRecentAtFirstPlace = (lastFiveMatches: LastFiveMatchesStatuses,
+                                                                teamWinningStatus: TeamWinningStatus)
    : LastFiveMatchesStatuses => {
    const { wins, losses, draws } = teamWinningStatus;
    const newLastFiveMatches = [ ...lastFiveMatches ] as LastFiveMatchesStatuses;
@@ -158,13 +159,13 @@ type TeamWinningStatus = Pick<TeamStats,
    'draws' |
    'losses'>;
 
-const getTeamWinningStatus = (teamOneGoals: number, teamTwoGoals: number): TeamWinningStatus => ({
+export const getTeamWinningStatus = (teamOneGoals: number, teamTwoGoals: number): TeamWinningStatus => ({
    wins: teamOneGoals > teamTwoGoals,
    draws: teamOneGoals === teamTwoGoals,
    losses: teamOneGoals < teamTwoGoals
 });
 
-const sortStandingSetsByWinsAndGoalsDifferenceAndGoalsScored = (standings: StandingsHash) =>
+export const sortStandingSetsByPointsAndGoalsDifferenceAndGoalsScored = (standings: StandingsHash) =>
    Object.keys(standings).map(i => standings[i])
          .sort((a: StandingsSet, b: StandingsSet) => {
             if (a.points > b.points) {
