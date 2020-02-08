@@ -32,9 +32,11 @@ export const roundsReducer = (state: RoundsReducerState = roundsReducerState,
 const storeRounds = (state: RoundsReducerState,
                      action: StoreRoundsActionCreator): RoundsReducerState => {
    const { rounds, selectedRoundId } = action;
+   const numberOfRounds = rounds.length;
 
    return {
-      selectedRoundId: selectedRoundId || rounds[rounds.length - 1].round,
+      selectedRoundId: selectedRoundId <= numberOfRounds && selectedRoundId > 0 ? selectedRoundId
+                                                                                : rounds[numberOfRounds - 1].round,
       rounds
    };
 };
