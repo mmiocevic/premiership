@@ -31,10 +31,10 @@ export const roundsReducer = (state: RoundsReducerState = roundsReducerState,
 
 const storeRounds = (state: RoundsReducerState,
                      action: StoreRoundsActionCreator): RoundsReducerState => {
-   const { rounds } = action;
+   const { rounds, selectedRoundId } = action;
 
    return {
-      selectedRoundId: rounds[rounds.length - 1].round,
+      selectedRoundId: selectedRoundId || rounds[rounds.length - 1].round,
       rounds
    };
 };

@@ -2,13 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import { store } from './configuration/StoreConfiguration';
+import { store, history } from './configuration/StoreConfiguration';
 import AppComponent from './ui/AppComponent';
 import './index.scss';
+import { ConnectedRouter } from 'connected-react-router';
+import { Switch, Route } from 'react-router-dom';
 
 ReactDOM.render((
    <Provider store={store}>
-      <AppComponent/>
+      <ConnectedRouter history={history}>
+         <>
+            <Switch>
+               <Route component={AppComponent}/>
+            </Switch>
+         </>
+      </ConnectedRouter>
    </Provider>
 ), document.getElementById('root'));
 

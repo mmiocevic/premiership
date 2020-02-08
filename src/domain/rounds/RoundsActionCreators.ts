@@ -12,11 +12,13 @@ export const getRoundsActionCreator = (): GetRoundsActionCreator => ({
 export interface StoreRoundsActionCreator {
    type: RoundsActionTypes.STORE_ROUNDS;
    rounds: RoundModel[];
+   selectedRoundId: number;
 }
 
-export const storeRoundsActionCreator = (rounds: RoundModel[]): StoreRoundsActionCreator => ({
+export const storeRoundsActionCreator = (rounds: RoundModel[], selectedRoundId: number): StoreRoundsActionCreator => ({
    type: RoundsActionTypes.STORE_ROUNDS,
-   rounds
+   rounds,
+   selectedRoundId
 });
 
 export interface ChangeSelectedRoundIdActionCreator {
