@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import * as serviceWorker from './serviceWorker';
-import { store, history } from './configuration/StoreConfiguration';
-import AppComponent from './ui/AppComponent';
-import './index.scss';
+import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
-import { Switch, Route } from 'react-router-dom';
+import * as serviceWorker from './serviceWorker';
+import { history, store } from './configuration/StoreConfiguration';
+import AppComponent from './ui/AppComponent';
 import ErrorHandlingComponent from './ui/error-handling/ErrorHandlingComponent';
+import './index.scss';
 
 ReactDOM.render((
    <Provider store={store}>

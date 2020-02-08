@@ -1,24 +1,24 @@
 import { AnyAction } from 'redux';
-import { ClearErrorActionCreator, SetErrorActionCreator } from './ErrorHandlingActionCreators';
+import { ClearErrorActionCreator, ErrorType, SetErrorActionCreator } from './ErrorHandlingActionCreators';
 import { ErrorHandlingActionTypes } from './ErrorHandlingActionTypes';
 
-export interface ErrorHandlingReducerState<T> {
-   error: T | undefined;
+export interface ErrorHandlingReducerState {
+   error: ErrorType | undefined;
 }
 
 const errorHandlingReducerState = {
    error: undefined
 };
 
-type ErrorHandlingReducerActions<T> = SetErrorActionCreator<T>
+type ErrorHandlingReducerActions = SetErrorActionCreator
    | ClearErrorActionCreator
    | AnyAction;
 
-export const errorHandlingReducer = <T>(state: ErrorHandlingReducerState<T> = errorHandlingReducerState,
-                                 action: ErrorHandlingReducerActions<T>) => {
+export const errorHandlingReducer = (state: ErrorHandlingReducerState = errorHandlingReducerState,
+                                     action: ErrorHandlingReducerActions) => {
    switch (action.type) {
       case ErrorHandlingActionTypes.SET_ERROR:
-         return setError(state, action as SetErrorActionCreator<T>);
+         return setError(state, action as SetErrorActionCreator);
       case ErrorHandlingActionTypes.CLEAR_ERROR:
          return clearError(state, action as ClearErrorActionCreator);
       default:
@@ -26,14 +26,14 @@ export const errorHandlingReducer = <T>(state: ErrorHandlingReducerState<T> = er
    }
 };
 
-const setError = <T>(state: ErrorHandlingReducerState<T>,
-                     action: SetErrorActionCreator<T>): ErrorHandlingReducerState<T> => ({
+const setError = (state: ErrorHandlingReducerState,
+                  action: SetErrorActionCreator): ErrorHandlingReducerState => ({
    ...state,
    error: action.error
 });
 
-const clearError = <T>(state: ErrorHandlingReducerState<T>,
-                       action: ClearErrorActionCreator): ErrorHandlingReducerState<T> => ({
+const clearError = (state: ErrorHandlingReducerState,
+                    action: ClearErrorActionCreator): ErrorHandlingReducerState => ({
    ...state,
    error: undefined
 });

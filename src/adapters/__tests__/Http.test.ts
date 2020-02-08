@@ -1,6 +1,6 @@
 import 'jest';
-import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import axios from 'axios';
 import { Http } from '../Http';
 
 describe('Http', () => {

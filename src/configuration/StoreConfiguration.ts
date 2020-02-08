@@ -1,17 +1,17 @@
-import { applyMiddleware, combineReducers, createStore, compose } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { roundsReducer, RoundsReducerState } from '../domain/rounds/RoundsReducer';
-import { roundsSagas } from '../domain/rounds/RoundsSagas';
 import { connectRouter, routerMiddleware, RouterRootState } from 'connected-react-router';
-import { createBrowserHistory } from 'history'
+import { createBrowserHistory } from 'history';
+import { roundsReducer, RoundsReducerState } from '../domain/rounds/RoundsReducer';
 import { errorHandlingReducer, ErrorHandlingReducerState } from '../domain/error-handling/ErrorHandlingReducer';
+import { roundsSagas } from '../domain/rounds/RoundsSagas';
 
 const sagaMiddleware = createSagaMiddleware();
 export const history = createBrowserHistory();
 
-export type StoreState<T> = RouterRootState & {
+export type StoreState = RouterRootState & {
    roundsReducer: RoundsReducerState;
-   errorHandlingReducer: ErrorHandlingReducerState<T>;
+   errorHandlingReducer: ErrorHandlingReducerState;
 }
 
 export const store = createStore(

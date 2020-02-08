@@ -2,12 +2,14 @@ import 'jest';
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { createStore } from 'redux';
-import { getRoundsAdapter } from '../../../adapters/rounds/RoundsAdapter';
 import { roundsReducer } from '../RoundsReducer';
 import { roundsSagas } from '../RoundsSagas';
+import { getRoundsAdapter } from '../../../adapters/rounds/RoundsAdapter';
 import { changeSelectedRoundIdActionCreator, getRoundsActionCreator } from '../RoundsActionCreators';
 import { RoundModel } from '../RoundsModels';
 import { extractRoundIds, getRoundById } from '../RoundsUtilities';
+import { roundQueryParamSelector } from '../RoundsSelectors';
+import { ErrorType, setErrorActionCreator } from '../../error-handling/ErrorHandlingActionCreators';
 
 describe('RoundsDomain', () => {
    it('should have specific initial state in reducer', () => {
@@ -26,7 +28,8 @@ describe('RoundsDomain', () => {
          return expectSaga(roundsSagas)
             .withReducer(roundsReducer)
             .provide([
-               [ matchers.call.fn(getRoundsAdapter), rounds ]
+               [ matchers.call.fn(getRoundsAdapter), rounds ],
+               [ matchers.select(roundQueryParamSelector), 0 ]
             ])
             .dispatch(getRoundsActionCreator())
             .hasFinalState({
@@ -48,12 +51,74 @@ describe('RoundsDomain', () => {
          return expectSaga(roundsSagas)
             .withReducer(roundsReducer)
             .provide([
-               [ matchers.call.fn(getRoundsAdapter), rounds ]
+               [ matchers.call.fn(getRoundsAdapter), rounds ],
+               [ matchers.select(roundQueryParamSelector), 0 ]
             ])
             .dispatch(getRoundsActionCreator())
             .hasFinalState({
                selectedRoundId: 4,
                rounds: rounds
+            })
+            .run();
+      });
+
+      it('should set selectedRoundId to item based on query param', () => {
+         const rounds: RoundModel[] = [
+            { round: 1, matches: [] },
+            { round: 2, matches: [] },
+            { round: 3, matches: [] }
+         ];
+
+         return expectSaga(roundsSagas)
+            .withReducer(roundsReducer)
+            .provide([
+               [ matchers.call.fn(getRoundsAdapter), rounds ],
+               [ matchers.select(roundQueryParamSelector), 2 ]
+            ])
+            .dispatch(getRoundsActionCreator())
+            .hasFinalState({
+               selectedRoundId: 2,
+               rounds: rounds
+            })
+            .run();
+      });
+
+      it('should set selectedRoundId to last item if value in query param not in range', () => {
+         const rounds: RoundModel[] = [
+            { round: 1, matches: [] },
+            { round: 2, matches: [] },
+            { round: 3, matches: [] }
+         ];
+
+         return expectSaga(roundsSagas)
+            .withReducer(roundsReducer)
+            .provide([
+               [ matchers.call.fn(getRoundsAdapter), rounds ],
+               [ matchers.select(roundQueryParamSelector), 4 ]
+            ])
+            .dispatch(getRoundsActionCreator())
+            .hasFinalState({
+               selectedRoundId: 3,
+               rounds: rounds
+            })
+            .run();
+      });
+
+      it('should', () => {
+         const error: ErrorType = {
+            message: 'I do not work on Sunday'
+         };
+
+         return expectSaga(roundsSagas)
+            .withReducer(roundsReducer)
+            .provide([
+               [ matchers.call.fn(getRoundsAdapter), Promise.reject(error) ]
+            ])
+            .put(setErrorActionCreator(error))
+            .dispatch(getRoundsActionCreator())
+            .hasFinalState({
+               selectedRoundId: -1,
+               rounds: []
             })
             .run();
       });

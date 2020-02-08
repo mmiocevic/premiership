@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export class Http {
-   public static get = async(url: string) => {
+   public static get = async <T>(url: string): Promise<T> => {
       try {
          const response = await axios.get(url);
          return response.data;

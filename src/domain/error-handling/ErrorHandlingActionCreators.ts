@@ -1,17 +1,21 @@
 import { ErrorHandlingActionTypes } from './ErrorHandlingActionTypes';
 
-export interface SetErrorActionCreator <T>{
-   type: ErrorHandlingActionTypes.SET_ERROR;
-   error: T
+export interface ErrorType {
+   message: string;
 }
 
-export const setErrorActionCreator = <T>(error: T): SetErrorActionCreator<T> => ({
+export interface SetErrorActionCreator {
+   type: ErrorHandlingActionTypes.SET_ERROR;
+   error: ErrorType | undefined;
+}
+
+export const setErrorActionCreator = (error: ErrorType | undefined): SetErrorActionCreator => ({
    type: ErrorHandlingActionTypes.SET_ERROR,
    error
 });
 
 export interface ClearErrorActionCreator {
-   type: ErrorHandlingActionTypes.CLEAR_ERROR
+   type: ErrorHandlingActionTypes.CLEAR_ERROR;
 }
 
 export const clearErrorActionCreator = (): ClearErrorActionCreator => ({

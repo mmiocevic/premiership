@@ -29,7 +29,7 @@ interface PropsState {
    selectedRoundId: number;
 }
 
-const mapStateToProps = (state: StoreState<undefined>): PropsState => ({
+const mapStateToProps = (state: StoreState): PropsState => ({
    rounds: state.roundsReducer.rounds,
    selectedRoundId: state.roundsReducer.selectedRoundId
 });

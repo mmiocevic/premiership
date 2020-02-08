@@ -1,7 +1,7 @@
 import LocalizedStrings from 'react-localization';
 
 export type Locales = 'en' | 'hr';
-export const locales = [ 'en', 'hr' ];
+export const locales: [ Locales, Locales ] = [ 'en', 'hr' ];
 
 export const localization = new LocalizedStrings({
    en: {
@@ -44,14 +44,16 @@ export const localization = new LocalizedStrings({
       notPlayed: 'Neodigrano',
       pts: 'Bod',
       rank: 'Rang',
-      round: 'Runda',
+      round: 'Kolo',
       w: 'P',
       win: 'Pobjeda'
    }
 });
 
+const localeKey: string = 'premiership-locale';
+
 export const setLocaleToStorage = (locale: Locales) =>
-   window.localStorage && window.localStorage.setItem('premiership-locale', locale);
+   window.localStorage && window.localStorage.setItem(localeKey, locale);
 
 export const getLocaleFromStorageOrDefaultLocale = (): Locales =>
-   (window.localStorage && (window.localStorage.getItem('premiership-locale') as Locales)) || locales[0];
+   (window.localStorage && (window.localStorage.getItem(localeKey) as Locales)) || locales[0];

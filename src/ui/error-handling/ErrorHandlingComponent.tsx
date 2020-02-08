@@ -4,18 +4,18 @@ import { Dispatch } from 'redux';
 import { StoreState } from '../../configuration/StoreConfiguration';
 import {
    clearErrorActionCreator,
-   ClearErrorActionCreator
+   ClearErrorActionCreator,
+   ErrorType
 } from '../../domain/error-handling/ErrorHandlingActionCreators';
 import './ErrorHandlingComponent.scss';
-import { AxiosError } from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons/faWindowClose';
 
-interface PropsState<T> {
-   error: T;
+interface PropsState {
+   error: ErrorType | undefined;
 }
 
-const mapStateToProps = (state: StoreState<AxiosError>) => ({
+const mapStateToProps = (state: StoreState) => ({
    error: state.errorHandlingReducer.error
 });
 
@@ -29,9 +29,9 @@ const mapDispatchToProps = (dispatch: Dispatch<DispatchStateType>): DispatchStat
    clearError: () => dispatch(clearErrorActionCreator())
 });
 
-export type ErrorHandlingComponentProps<T> = PropsState<T> & DispatchState;
+export type ErrorHandlingComponentProps = PropsState & DispatchState;
 
-export const ErrorHandlingComponent = ({ error, clearError }: ErrorHandlingComponentProps<AxiosError | undefined>): JSX.Element | null =>
+export const ErrorHandlingComponent = ({ error, clearError }: ErrorHandlingComponentProps): JSX.Element | null =>
    error ? (
       <div className="error-handling">
          <div>{error.message}</div>

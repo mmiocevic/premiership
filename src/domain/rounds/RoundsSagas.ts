@@ -1,4 +1,5 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
    ChangeSelectedRoundIdActionCreator,
    GetRoundsActionCreator,
@@ -6,11 +7,9 @@ import {
 } from './RoundsActionCreators';
 import { RoundsActionTypes } from './RoundsActionTypes';
 import { RoundModel } from './RoundsModels';
-import { getRoundsAdapter } from '../../adapters/rounds/RoundsAdapter';
-import { push } from 'connected-react-router';
-import { select } from 'redux-saga-test-plan/matchers';
-import { roundQueryParamSelector } from './__tests__/RoundsSelectors';
+import { roundQueryParamSelector } from './RoundsSelectors';
 import { setErrorActionCreator } from '../error-handling/ErrorHandlingActionCreators';
+import { getRoundsAdapter } from '../../adapters/rounds/RoundsAdapter';
 
 function* getRoundsSaga(action: GetRoundsActionCreator) {
    try {
@@ -20,14 +19,14 @@ function* getRoundsSaga(action: GetRoundsActionCreator) {
       yield put(storeRoundsActionCreator(rounds, selectedRoundId));
    }
    catch (e) {
-      yield put(setErrorActionCreator(e))
+      yield put(setErrorActionCreator(e));
    }
 }
 
 function* changeSelectedRoundIdSaga(action: ChangeSelectedRoundIdActionCreator) {
    yield put(push({
       search: `round=${action.selectedRoundId}`
-   }))
+   }));
 }
 
 export function* roundsSagas() {

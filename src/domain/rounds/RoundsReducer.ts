@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
-import { RoundsActionTypes } from './RoundsActionTypes';
 import { ChangeSelectedRoundIdActionCreator, StoreRoundsActionCreator } from './RoundsActionCreators';
+import { RoundsActionTypes } from './RoundsActionTypes';
 import { RoundModel } from './RoundsModels';
 
 export interface RoundsReducerState {
