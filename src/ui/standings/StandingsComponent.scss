@@ -10,33 +10,33 @@
 
       .match-statuses {
          display: flex;
-
-         .loss,
-         .draw,
-         .win,
-         .not_played {
-            width: 1rem;
-            height: 1rem;
-            margin: 0.2rem;
-            border-radius: 50%;
-            border: 1px solid $palette-color-greyish;
-         }
-
-         .loss {
-            background-color: $palette-color-reddish;
-         }
-
-         .draw {
-            background: #ffffff;
-         }
-
-         .win {
-            background-color: $palette-color-greenish;
-         }
-
-         .not_played {
-            background-color: $palette-color-greyish;
-         }
       }
+   }
+
+   .loss,
+   .draw,
+   .win,
+   .not_played {
+      width: 1rem;
+      height: 1rem;
+      margin: 0.2rem;
+      border-radius: 50%;
+      border: 1px solid $palette-color-greyish-regular;
+   }
+
+   .loss {
+      background-color: $palette-color-reddish;
+   }
+
+   .draw {
+      background: #ffffff;
+   }
+
+   .win {
+      background-color: $palette-color-greenish;
+   }
+
+   .not_played {
+      background-color: $palette-color-greyish-regular;
    }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import './StandingsComponent.scss';
 import { MatchStatus, StandingsSet } from '../../domain/standings/StandingsUtilities';
+import { StandingsLegendComponent } from './last-five-matches/StandingsLegendComponent';
 
 interface StandingsComponentProps {
    standings: StandingsSet[];
@@ -52,10 +53,12 @@ export const StandingsComponent = ({ standings }: StandingsComponentProps): JSX.
          ))}
          </tbody>
       </table>
+
+      <StandingsLegendComponent/>
    </div>
 );
 
-const MatchStatusesClassNames = [
+export const MatchStatusesClassNames = [
    'loss',
    'draw',
    'win',

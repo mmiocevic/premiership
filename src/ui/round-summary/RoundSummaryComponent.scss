@@ -1,16 +1,20 @@
 @import '../../index';
 
 .round-summary {
-   th:first-child, td:first-child {
-      text-align: right;
-   }
+   overflow: auto;
 
-   th:last-child, td:last-child {
-      text-align: left;
-   }
+   table {
+      th:first-child, td:first-child {
+         text-align: right;
+      }
 
-   .winner {
-      font-size: 0.7rem;
-      color: $palette-color-blueish-dark;
+      th:last-child, td:last-child {
+         text-align: left;
+      }
+
+      .winner {
+         font-size: 0.7rem;
+         color: $palette-color-blueish-dark;
+      }
    }
 }

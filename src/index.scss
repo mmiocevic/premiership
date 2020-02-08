@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 $palette-color-blackish: #001433;
-$palette-color-greyish: #a5acaf;
+$palette-color-greyish-regular: #a5acaf;
+$palette-color-greyish-light: #e4e4e4;
 $palette-color-blueish-dark: #245998;
-$palette-color-blueish-regular: #87bbf9;
+$palette-color-blueish-regular: #3991f9;
 $palette-color-blueish-light: #edf5ff;
 $palette-color-reddish: #cd5c5c;
 $palette-color-greenish: #3fb93f;
-$palette-color-white: #ffffff;
 
 body {
    margin: 0;
@@ -24,10 +24,11 @@ code {
 table {
    width: 100%;
    border-collapse: collapse;
-   font-size: 0.9rem;
+   font-size: 0.8rem;
 
    thead {
-      background-color: $palette-color-blueish-regular
+      background-color: $palette-color-blueish-regular;
+      color: #ffffff;
    }
 
    tr:nth-child(even) {
@@ -35,7 +36,12 @@ table {
    }
 
    th, td {
-      padding: 0.8rem 0.4rem;
-      white-space: nowrap;
+      padding: 0.8rem 0.5rem;
    }
+}
+
+.table-container {
+   margin: 0.3rem 0.3rem 3rem 0.3rem;
+   border: 1px solid $palette-color-greyish-light;
+   box-shadow: 0px 0px 3px 1px $palette-color-greyish-light;
 }

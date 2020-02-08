@@ -68,13 +68,13 @@ export const AppComponent = (
                   />
                </div>
 
-               <div>
+               <div className="table-container">
                   <RoundSummaryComponent
                      matches={getRoundById(rounds, selectedRoundId).matches}
                   />
                </div>
 
-               <div>
+               <div className="table-container">
                   <StandingsComponent
                      standings={roundToStandings(rounds, selectedRoundId)}
                   />
