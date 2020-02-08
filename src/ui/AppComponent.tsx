@@ -17,11 +17,12 @@ import { extractRoundIds, getRoundById } from '../domain/rounds/RoundsUtilities'
 import { HeaderComponent } from './layout/header/HeaderComponent';
 import { FooterComponent } from './layout/footer/FooterComponent';
 import {
-   getLocaleFromStorageOrDefaultLocale, locales,
+   getLocaleFromStorageOrDefaultLocale,
    Locales,
    localization,
    setLocaleToStorage
 } from '../configuration/LocalizationConfiguration';
+import './AppComponent.scss';
 
 interface PropsState {
    rounds: RoundModel[];
@@ -72,9 +73,11 @@ export const AppComponent = (
             }}
          />
 
+         <div className="football" />
+
          {rounds.length > 0 && (
             <>
-               <div>
+               <div className="center space-top-bottom">
                   <RoundChangerComponent
                      selectedRoundId={selectedRoundId}
                      roundIds={extractRoundIds(rounds)}
@@ -82,13 +85,13 @@ export const AppComponent = (
                   />
                </div>
 
-               <div className="table-container">
+               <div className="table-container space-top-bottom">
                   <RoundSummaryComponent
                      matches={getRoundById(rounds, selectedRoundId).matches}
                   />
                </div>
 
-               <div className="table-container">
+               <div className="table-container space-top-bottom">
                   <StandingsComponent
                      standings={roundToStandings(rounds, selectedRoundId)}
                   />

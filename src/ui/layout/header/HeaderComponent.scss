@@ -1,6 +1,9 @@
 @import '../../../index';
 
 .header {
+   position: fixed;
+   width: 100%;
+   box-sizing: border-box;
    background-color: $palette-color-blackish;
    display: flex;
    align-items: center;
@@ -21,6 +24,7 @@
    }
 
    select {
+      width: 3rem;
       padding: 0.2rem 0.3rem;
    }
 }

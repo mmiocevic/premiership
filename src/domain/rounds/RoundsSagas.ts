@@ -7,7 +7,7 @@ import {
 import { RoundsActionTypes } from './RoundsActionTypes';
 import { RoundModel } from './RoundsModels';
 import { getRoundsAdapter } from '../../adapters/rounds/RoundsAdapter';
-import { getSearch, push } from 'connected-react-router';
+import { push } from 'connected-react-router';
 import { select } from 'redux-saga-test-plan/matchers';
 import { roundQueryParamSelector } from './__tests__/RoundsSelectors';
 

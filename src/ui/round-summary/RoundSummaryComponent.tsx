@@ -22,6 +22,7 @@ export const RoundSummaryComponent = ({ matches }: RoundSummaryComponentProps): 
                <th></th>
                <th></th>
                <th></th>
+               <th></th>
                <th>{localization.away}</th>
             </tr>
             </thead>
@@ -37,6 +38,7 @@ export const RoundSummaryComponent = ({ matches }: RoundSummaryComponentProps): 
                      <td>{homeTeam}</td>
                      <td>{isTeamWinner(homeTeamGoals, awayTeamGoals) ? winnerIcon : null}</td>
                      <td>{homeTeamGoals}</td>
+                     <td>:</td>
                      <td>{awayTeamGoals}</td>
                      <td>{isTeamWinner(awayTeamGoals, homeTeamGoals) ? winnerIcon : null}</td>
                      <td>{awayTeam}</td>

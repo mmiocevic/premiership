@@ -1,0 +1,20 @@
+@import '../index';
+
+.app {
+   .football {
+      background-image: url('../assests/images/football-field.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: top;
+      height: 300px;
+   }
+}
+
+@media (min-width: $large-device-size) {
+   .app {
+      .football {
+         height: 600px;
+         background-attachment: fixed;
+      }
+   }
+}

@@ -5,44 +5,46 @@ export const locales = [ 'en', 'hr' ];
 
 export const localization = new LocalizedStrings({
    en: {
-      round: 'Round',
-      home: 'Home',
       away: 'Away',
-      rank: 'Rank',
       club: 'Club',
-      mp: 'MP',
-      w: 'W',
       d: 'D',
-      l: 'L',
-      gs: 'GS',
+      draw: 'Draw',
       ga: 'GA',
       gd: 'GD',
-      pts: 'Pts',
+      gs: 'GS',
+      home: 'Home',
+      l: 'L',
       lastFive: 'Last 5',
       loss: 'Loss',
-      draw: 'Draw',
-      win: 'Win',
-      notPlayed: 'Not played'
+      mostRecentMatch: 'Most recent match',
+      mp: 'MP',
+      notPlayed: 'Not played',
+      pts: 'Pts',
+      rank: 'Rank',
+      round: 'Round',
+      w: 'W',
+      win: 'Win'
    },
    hr: {
-      round: 'Runda',
-      home: 'Domaćin',
       away: 'Gosti',
-      rank: 'Rang',
       club: 'Klub',
-      mp: 'UT',
-      w: 'P',
       d: 'N',
-      l: 'I',
-      gs: 'DG',
+      draw: 'Neriješeno',
       ga: 'PG',
       gd: 'Raz.',
-      pts: 'Bod',
+      gs: 'DG',
+      home: 'Domaćin',
+      l: 'I',
       lastFive: 'Zadnjih 5',
       loss: 'Poraz',
-      draw: 'Neriješeno',
-      win: 'Pobjeda',
-      notPlayed: 'Ne odigrano'
+      mostRecentMatch: 'Najnovija utakmica',
+      mp: 'UT',
+      notPlayed: 'Neodigrano',
+      pts: 'Bod',
+      rank: 'Rang',
+      round: 'Runda',
+      w: 'P',
+      win: 'Pobjeda'
    }
 });
 
@@ -50,4 +52,4 @@ export const setLocaleToStorage = (locale: Locales) =>
    window.localStorage && window.localStorage.setItem('premiership-locale', locale);
 
 export const getLocaleFromStorageOrDefaultLocale = (): Locales =>
-   window.localStorage && (window.localStorage.getItem('premiership-locale') as Locales) || locales[0];
+   (window.localStorage && (window.localStorage.getItem('premiership-locale') as Locales)) || locales[0];

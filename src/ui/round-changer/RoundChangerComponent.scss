@@ -1,6 +1,9 @@
+@import '../../index';
+
 .round-changer {
-   padding: 0.5rem;
-   background-color: #ffffff;
+   padding: 1rem;
+   background-color: $palette-color-blueish-dark;
+   color: #ffffff;
    margin: 1rem;
    font-size: 1rem;
 }

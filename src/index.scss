@@ -9,6 +9,9 @@ $palette-color-blueish-light: #edf5ff;
 $palette-color-reddish: #cd5c5c;
 $palette-color-greenish: #3fb93f;
 
+$medium-device-size: 40rem;
+$large-device-size: 90rem;
+
 body {
    margin: 0;
    font-family: Roboto;
@@ -24,7 +27,9 @@ code {
 table {
    width: 100%;
    border-collapse: collapse;
+   border-spacing: 0;
    font-size: 0.8rem;
+   border: 0;
 
    thead {
       background-color: $palette-color-blueish-regular;
@@ -41,7 +46,28 @@ table {
 }
 
 .table-container {
-   margin: 0.3rem 0.3rem 3rem 0.3rem;
+   margin: 0.3rem;
    border: 1px solid $palette-color-greyish-light;
    box-shadow: 0px 0px 3px 1px $palette-color-greyish-light;
+}
+
+.center {
+   display: flex;
+   justify-content: center;
+}
+
+.space-top-bottom {
+   margin: 3rem 0;
+}
+
+@media (min-width: $medium-device-size) {
+   table {
+      font-size: 1rem;
+   }
+
+   .table-container {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 48rem;
+   }
 }

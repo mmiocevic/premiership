@@ -44,6 +44,7 @@ export const StandingsComponent = ({ standings }: StandingsComponentProps): JSX.
                   <div className="match-statuses">
                      {standingsSet.lastFiveMatches.map((matchStatus, index) => (
                         <div
+                           title={index === 0 ? localization.mostRecentMatch : ''}
                            key={index}
                            className={getClassNameBasedOnMatchStatus(matchStatus)}
                         />

@@ -2,7 +2,7 @@ import { applyMiddleware, combineReducers, createStore, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { roundsReducer, RoundsReducerState } from '../domain/rounds/RoundsReducer';
 import { roundsSagas } from '../domain/rounds/RoundsSagas';
-import { connectRouter, routerMiddleware, RouterRootState, RouterState } from 'connected-react-router';
+import { connectRouter, routerMiddleware, RouterRootState } from 'connected-react-router';
 import { createBrowserHistory } from 'history'
 
 const sagaMiddleware = createSagaMiddleware();
