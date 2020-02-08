@@ -75,8 +75,10 @@ table {
 
 @media (min-width: $large-device-size) {
    table {
-      tr:hover {
-         background-color: $palette-color-orangish;
+      tbody {
+         tr:hover {
+            background-color: $palette-color-orangish;
+         }
       }
    }
 }
