@@ -6,6 +6,7 @@ export const locales = [ 'en', 'hr' ];
 export const localization = new LocalizedStrings({
    en: {
       away: 'Away',
+      close: 'Close',
       club: 'Club',
       d: 'D',
       draw: 'Draw',
@@ -27,6 +28,7 @@ export const localization = new LocalizedStrings({
    },
    hr: {
       away: 'Gosti',
+      close: 'Zatvori',
       club: 'Klub',
       d: 'N',
       draw: 'Neriješeno',

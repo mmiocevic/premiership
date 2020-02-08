@@ -7,6 +7,7 @@ import AppComponent from './ui/AppComponent';
 import './index.scss';
 import { ConnectedRouter } from 'connected-react-router';
 import { Switch, Route } from 'react-router-dom';
+import ErrorHandlingComponent from './ui/error-handling/ErrorHandlingComponent';
 
 ReactDOM.render((
    <Provider store={store}>
@@ -15,6 +16,7 @@ ReactDOM.render((
             <Switch>
                <Route component={AppComponent}/>
             </Switch>
+            <ErrorHandlingComponent/>
          </>
       </ConnectedRouter>
    </Provider>

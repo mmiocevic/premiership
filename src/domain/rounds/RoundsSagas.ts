@@ -10,6 +10,7 @@ import { getRoundsAdapter } from '../../adapters/rounds/RoundsAdapter';
 import { push } from 'connected-react-router';
 import { select } from 'redux-saga-test-plan/matchers';
 import { roundQueryParamSelector } from './__tests__/RoundsSelectors';
+import { setErrorActionCreator } from '../error-handling/ErrorHandlingActionCreators';
 
 function* getRoundsSaga(action: GetRoundsActionCreator) {
    try {
@@ -19,7 +20,7 @@ function* getRoundsSaga(action: GetRoundsActionCreator) {
       yield put(storeRoundsActionCreator(rounds, selectedRoundId));
    }
    catch (e) {
-      // TODO MM
+      yield put(setErrorActionCreator(e))
    }
 }
 

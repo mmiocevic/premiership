@@ -29,7 +29,7 @@ interface PropsState {
    selectedRoundId: number;
 }
 
-const mapStateToProps = (state: StoreState): PropsState => ({
+const mapStateToProps = (state: StoreState<undefined>): PropsState => ({
    rounds: state.roundsReducer.rounds,
    selectedRoundId: state.roundsReducer.selectedRoundId
 });
@@ -39,10 +39,10 @@ interface DispatchState {
    changeSelectedRoundId: (selectedRoundId: number) => void;
 }
 
-type DispatchStateTypes = GetRoundsActionCreator
+type DispatchStateType = GetRoundsActionCreator
    | ChangeSelectedRoundIdActionCreator;
 
-const mapDispatchToProps = (dispatch: Dispatch<DispatchStateTypes>): DispatchState => ({
+const mapDispatchToProps = (dispatch: Dispatch<DispatchStateType>): DispatchState => ({
    getRounds: () => dispatch(getRoundsActionCreator()),
    changeSelectedRoundId: (selectedRoundId: number) => dispatch(changeSelectedRoundIdActionCreator(selectedRoundId))
 });
